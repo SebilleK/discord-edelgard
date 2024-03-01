@@ -31,12 +31,15 @@ node src/register-commands.js
 To type when the bot is present on a Discord channel.
 
 ```bash
-/elhey: the bot replies with a simple greeting.
-/elquote: the bot replies with a random Edelgard quote from a set of predetermined ones (on src/data/quotes.js)
+/elhey: replies with a simple greeting.
+/elquote: replies with a random Edelgard quote from a set of predetermined ones (on src/data/quotes.js)
+/elsight: replies with a fortune reading by the 8Ball API. Should include a question as an argument.
+/elhelp: lists all available slash commands on the chat.
 ```
 
 ## Useful Links & Resources
 
-- [https://nodemon.io/](https://nodemon.io/): Utility for auto restart a server on code changes.
+- [https://nodemon.io/](https://nodemon.io/): Utility for auto restarting a server on code changes.
 - [discord.js](https://discord.js.org/): A node.js module for easy interaction with the Discord API.
 - [tutorial_playlist](https://www.youtube.com/watch?v=KZ3tIGHU314&list=PLpmb-7WxPhe0ZVpH9pxT5MtC4heqej8Es): A youtube tutorial series made by Under Ctrl to teach you how to make your own Discord bot using discord.js.
+- [8ballAPI](https://www.eightballapi.com/): A free, public 8Ball API to get fortune readings.

@@ -7,6 +7,9 @@ import { Client, IntentsBitField } from 'discord.js';
 // quotes array
 import { quotes } from './data/quotes.js';
 
+// utilities
+import { predictionApiCall } from './utility.js';
+
 // ________
 
 const client = new Client({
@@ -22,9 +25,9 @@ client.on('messageCreate', message => {
 	// console.log(message.content);
 
 	// check if user is a bot
-	/* if (message.author.bot) {
+	if (message.author.bot) {
 		return;
-	} */
+	}
 
 	// if message contains edelgard, default message
 	if (message.content.toLowerCase().includes('edelgard')) {
@@ -35,7 +38,7 @@ client.on('messageCreate', message => {
 });
 
 // slash commands
-client.on('interactionCreate', interaction => {
+client.on('interactionCreate', async interaction => {
 	// not a slash command
 	if (!interaction.isChatInputCommand()) {
 		return;
@@ -51,6 +54,36 @@ client.on('interactionCreate', interaction => {
 			// note: already imported json files do not need to be parsed since they already are a js object. currently a js array is being used directly, but this note may be useful in the future.
 			const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
 			interaction.reply(`${randomQuote}`);
+		}
+
+		if (interaction.commandName === 'elsight') {
+			// returns response object from 8ball api, a future prediction
+
+			// check if the question is provided by the user, if not, return
+			const userQuestion = interaction.options.getString('question');
+
+			if (!userQuestion) {
+				interaction.reply('I cannot foresee the future without a question. 🦅');
+				return;
+			} else {
+				try {
+					const response = await predictionApiCall();
+					interaction.reply(`You asked: **"${userQuestion}"**. \nThe 8ball told me: **"${response.reading} "** 🦅`);
+				} catch (error) {
+					console.error(`Unexpected error while getting response from the API: ${error}`);
+					interaction.reply('Apologies, but an error occurred while foreseeing the future. Please try again later. 🦅');
+				}
+			}
+		}
+
+		if (interaction.commandName === 'elhelp') {
+			// list all available commands
+			interaction.reply(`>>> **The following slash commands are available:**
+			**/elhey:** Edelgard will greet you back.
+			**/elquote:** Edelgard will reply with a random Edelgard quote.
+			**/elsight:** Edelgard will predict the future with the help of a 8ball. You should provide a question.
+			**/elhelp:** Edelgard will list all available commands. You just did this one. 🦅 
+			`);
 		}
 	}
 });

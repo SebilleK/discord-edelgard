@@ -13,6 +13,22 @@ const commands = [
 		name: 'elquote',
 		description: 'Gives a random Edelgard quote',
 	},
+	{
+		name: 'elsight',
+		description: 'Predicts the future à la 8ball with a given question',
+		options: [
+			{
+				name: 'question',
+				description: 'The question 8ball should answer',
+				type: 3,
+				required: true,
+			},
+		],
+	},
+	{
+		name: 'elhelp',
+		description: 'Gives a list of commands',
+	},
 ];
 
 // async function to register commands, IIFE
