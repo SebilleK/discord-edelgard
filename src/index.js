@@ -121,5 +121,12 @@ client.on('ready', c => {
 	console.log(`${c.user.username} (${c.user.tag}) is online & ready for battle! 🦅 `);
 });
 
+// for process termination (General)
+process.on('SIGTERM', () => {
+	console.log('Edelgard will rest now. Terminating process... 🦅');
+	client.destroy();
+	process.exit();
+});
+
 //! authentication with bot token. Token can be found in the Discord developer portal and MUST be reset if compromised or changed. DO NOT SHARE THIS TOKEN.
 client.login(TOKEN);
