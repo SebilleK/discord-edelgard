@@ -43,3 +43,4 @@ To type when the bot is present on a Discord channel.
 - [discord.js](https://discord.js.org/): A node.js module for easy interaction with the Discord API.
 - [tutorial_playlist](https://www.youtube.com/watch?v=KZ3tIGHU314&list=PLpmb-7WxPhe0ZVpH9pxT5MtC4heqej8Es): A youtube tutorial series made by Under Ctrl to teach you how to make your own Discord bot using discord.js.
 - [8ballAPI](https://www.eightballapi.com/): A free, public 8Ball API to get fortune readings.
+- [EdelgardInfo](https://houses.fedatamine.com/en-uk/characters/2/Edelgard/basics): FE3H Datamining project, Edelgard information.
