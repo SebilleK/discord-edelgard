@@ -2,13 +2,13 @@
 import { TOKEN } from '../secret/config.js';
 
 // discord.js
-import { Client, IntentsBitField, EmbedBuilder } from 'discord.js';
+import { Client, IntentsBitField, EmbedBuilder, ActivityType } from 'discord.js';
 
 // quotes array
 import { quotes } from './data/quotes.js';
 
 // utilities
-import { predictionApiCall } from './utility.js';
+import { predictionApiCall, tenorApiCall } from './utility.js';
 
 // ________
 
@@ -98,6 +98,31 @@ client.on('interactionCreate', async interaction => {
 			}
 		}
 
+		if (interaction.commandName === 'elgif') {
+			// tenor api integration
+
+			try {
+				const response = await tenorApiCall();
+
+				const randomGif = response.results[Math.floor(Math.random() * response.results.length)];
+
+				// setImage should be used to display the gif on the embed. Be careful with the path to the gif (match a correct one according to the object on response)
+				//!! incorrect
+				/* console.log(randomGif.url);
+				console.log(randomGif.itemurl); */
+				//? correct
+				/* console.log(randomGif.media_formats.tinygif.url); */
+
+				// Don't forget to credit Tenor as per the API ToS
+				const embed = new EmbedBuilder().setColor(0xff0000).setTimestamp().setImage(randomGif.media_formats.tinygif.url).addFields({ name: 'Edelgard GIF 🦅', value: `Via Tenor.` });
+
+				interaction.reply({ embeds: [embed] });
+			} catch (error) {
+				console.error(`Unexpected error while getting response from the API: ${error}`);
+				interaction.reply('Apologies, but an error occurred while getting a random Edelgard GIF. Please try again later. 🦅');
+			}
+		}
+
 		if (interaction.commandName === 'elhelp') {
 			// list all available commands
 			const embed = new EmbedBuilder()
@@ -109,6 +134,7 @@ client.on('interactionCreate', async interaction => {
 					{ name: '**/elhey**', value: 'Edelgard will greet you back.' },
 					{ name: '**/elquote**', value: 'Edelgard will reply with a random Edelgard quote.' },
 					{ name: '**/elsight**', value: 'Edelgard will predict the future with the help of a 8ball. You should provide a question.' },
+					{ name: '**/elgif**', value: 'Edelgard will reply with a random Edelgard GIF via Tenor.' },
 					{ name: '**/elhelp**', value: 'Edelgard will list all available commands. You just did this one. 🦅 ' },
 				);
 			interaction.reply({ embeds: [embed] });
@@ -119,6 +145,11 @@ client.on('interactionCreate', async interaction => {
 // bot is online
 client.on('ready', c => {
 	console.log(`${c.user.username} (${c.user.tag}) is online & ready for battle! 🦅 `);
+
+	client.user.setActivity({
+		name: '/elhelp',
+		type: ActivityType.Playing,
+	});
 });
 
 // for process termination (General)

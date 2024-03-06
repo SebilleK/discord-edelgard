@@ -26,6 +26,10 @@ const commands = [
 		],
 	},
 	{
+		name: 'elgif',
+		description: 'Gives a random Edelgard via Tenor',
+	},
+	{
 		name: 'elhelp',
 		description: 'Gives a list of commands',
 	},

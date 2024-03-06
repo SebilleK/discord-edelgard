@@ -8,3 +8,6 @@ export const GUILD_ID = '';
 
 // client id (bot id)
 export const CLIENT_ID = '';
+
+// tenor api key
+export const TENOR_API_KEY = '';
