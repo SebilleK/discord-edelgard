@@ -32,6 +32,22 @@ To register new slash commands:
 node src/register-commands.js
 ```
 
+You should make sure you have all appropriate/equivalent configurations as per the template given.
+
+```bash
+// bot token
+export const TOKEN = '';
+
+// server id
+export const GUILD_ID = '';
+
+// client id (bot id)
+export const CLIENT_ID = '';
+
+// tenor api key
+export const TENOR_API_KEY = '';
+```
+
 ## Slash Commands
 
 To type when the bot is present on a Discord channel.
