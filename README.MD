@@ -4,7 +4,7 @@ A fun Discord bot based around Edelgard von Hresvelg from the videogame Fire Emb
 
 ## Preview
 
-![Preview](preview/preview.gif)
+![Preview](https://raw.githubusercontent.com/SebilleK/discord-edelgard/master/src/preview/preview.gif)
 
 ## Introduction & Set Up
 
