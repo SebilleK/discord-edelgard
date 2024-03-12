@@ -13,4 +13,6 @@ export const quotes = [
 	'Do you like my hair? Actually, it used to be much darker than this.',
 	"Perhaps it is due to the power of Crests, but heavy armor has never slowed me down. Still, it wouldn't hurt to improve further in that regard. As it were, nothing complements heavy armor better than an axe.",
 	'Challenge begets victory.',
+	'Me? Naive? Tell me, are you actually incabable of being quiet, or is your lack of self-awareness a condition of some sort?',
+	'Simply tell me your weaknesses, and you are welcome to stay. But is there enough time to cover them all?',
 ];

@@ -2,6 +2,10 @@
 
 A fun Discord bot based around Edelgard von Hresvelg from the videogame Fire Emblem: Three Houses.
 
+## Preview
+
+![Preview](preview/preview.gif)
+
 ## Introduction & Set Up
 
 I created this to see how I could implement a bot for Discord. It is inspired by Edelgard from Fire Emblem: Three Houses, and as such it has some fun features based around her, all documented below. Thank you for browsing! Make sure to check the resources if you want to make something similar.
@@ -19,6 +23,7 @@ alternatively without nodemon:
 npm install
 node src/index.js
 ```
+
 (or use the bat file included)
 
 To register new slash commands:
