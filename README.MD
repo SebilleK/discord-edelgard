@@ -4,7 +4,7 @@ A fun Discord bot based around Edelgard von Hresvelg from the videogame Fire Emb
 
 ## Preview
 
-![Preview](preview/preview.gif)
+![Preview](https://raw.githubusercontent.com/SebilleK/discord-edelgard/master/src/preview/preview.gif)
 
 ## Introduction & Set Up
 
@@ -30,6 +30,22 @@ To register new slash commands:
 
 ```bash
 node src/register-commands.js
+```
+
+You should make sure you have all appropriate/equivalent configurations as per the template given.
+
+```bash
+// bot token
+export const TOKEN = '';
+
+// server id
+export const GUILD_ID = '';
+
+// client id (bot id)
+export const CLIENT_ID = '';
+
+// tenor api key
+export const TENOR_API_KEY = '';
 ```
 
 ## Slash Commands
