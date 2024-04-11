@@ -2,10 +2,16 @@
 import { TOKEN } from '../secret/config.js';
 
 // discord.js
-import { Client, IntentsBitField, EmbedBuilder, ActivityType } from 'discord.js';
+import { Client, IntentsBitField, EmbedBuilder, ActivityType, AttachmentBuilder } from 'discord.js';
 
 // quotes array
 import { quotes } from './data/quotes.js';
+
+// ancient tongue conversion
+import { createCanvas, loadImage, registerFont } from 'canvas'; // canvas library
+
+// registering custom font
+registerFont('src/data/font/AncientLanguage.ttf', { family: 'Ancient Tongue' });
 
 // utilities
 import { predictionApiCall, tenorApiCall, openaiApiCall } from './utility.js';
@@ -149,6 +155,37 @@ client.on('interactionCreate', async interaction => {
 			}
 		}
 
+		if (interaction.commandName === 'elreyson') {
+			const userInput = interaction.options.getString('input');
+
+			// create a canvas
+			const canvas = createCanvas(500, 200);
+			const ctx = canvas.getContext('2d');
+
+			// background
+			ctx.fillStyle = 'white';
+			ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+			// custom font
+			ctx.font = '20px Ancient Tongue';
+
+			// draw on canvas
+			ctx.fillStyle = 'black';
+			ctx.fillText(userInput, 10, 50);
+
+			// convert canvas to buffer and make attachment
+			const buffer = canvas.toBuffer('image/png');
+
+			const attachment = new AttachmentBuilder(buffer);
+
+			const embed = new EmbedBuilder()
+				.setColor(0xff0000)
+				.setThumbnail('https://assets.fedatamine.com/3h/face_school/408/0.png')
+				.setTimestamp()
+				.addFields({ name: 'Ancient Tongue Conversion 🦅', value: `"${userInput}" converted into the Ancient Tongue` });
+			interaction.reply({ embeds: [embed], files: [attachment] });
+		}
+
 		if (interaction.commandName === 'elhelp') {
 			// list all available commands
 			const embed = new EmbedBuilder()
@@ -161,6 +198,8 @@ client.on('interactionCreate', async interaction => {
 					{ name: '**/elquote**', value: 'Edelgard will reply with a random Edelgard quote.' },
 					{ name: '**/elsight**', value: 'Edelgard will predict the future with the help of a 8ball. You should provide a question.' },
 					{ name: '**/elgif**', value: 'Edelgard will reply with a random Edelgard GIF via Tenor.' },
+					{ name: '**/el**', value: 'Edelgard will provide an ancient tongue conversion.' },
+					{ name: '**/elreyson**', value: 'Edelgard will convert text to the ancient tongue used by Herons (FE9/10).' },
 					{ name: '**/elhelp**', value: 'Edelgard will list all available commands. You just did this one. 🦅 ' },
 				);
 			interaction.reply({ embeds: [embed] });

@@ -42,6 +42,18 @@ const commands = [
 		],
 	},
 	{
+		name: 'elreyson',
+		description: 'Converts given question into Ancient Tongue (FE9/FE10)',
+		options: [
+			{
+				name: 'input',
+				description: 'Text to convert',
+				type: 3,
+				required: true,
+			},
+		],
+	},
+	{
 		name: 'elhelp',
 		description: 'Gives a list of commands',
 	},
