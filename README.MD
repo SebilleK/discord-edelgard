@@ -41,6 +41,7 @@ To type when the bot is present on a Discord channel.
 /elquote: replies with a random Edelgard quote from a set of predetermined ones (on src/data/quotes.js)
 /elsight: replies with a fortune reading by the 8Ball API. Should include a question as an argument.
 /elgif: replies with a random Edelgard gif via Tenor (The query used is by default "edelgard", and the first 100 results are used and then randomized, so other Fire Emblem gifs may appear).
+/el: replies to the given question with the OpenAI API (gpt 3.5) in Edelgard's tone.
 /elhelp: lists all available slash commands on the chat.
 ```
 
@@ -51,4 +52,5 @@ To type when the bot is present on a Discord channel.
 - [tutorial_playlist](https://www.youtube.com/watch?v=KZ3tIGHU314&list=PLpmb-7WxPhe0ZVpH9pxT5MtC4heqej8Es): A youtube tutorial series made by Under Ctrl to teach you how to make your own Discord bot using discord.js.
 - [8ballAPI](https://www.eightballapi.com/): A free, public 8Ball API to get fortune readings.
 - [TenorAPI](https://developers.google.com/tenor/guides/quickstart): Tenor API V2 for gifs. V1 isn't supported any longer. [Migration_from_V1](https://developers.google.com/tenor/guides/migrate-from-v1).
+- [OpenAIAPI](https://platform.openai.com/docs/introduction): OpenAI API for the /el command.
 - [EdelgardInfo](https://houses.fedatamine.com/en-uk/characters/2/Edelgard/basics): FE3H Datamining project, Edelgard information.

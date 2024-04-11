@@ -30,6 +30,18 @@ const commands = [
 		description: 'Gives a random Edelgard via Tenor',
 	},
 	{
+		name: 'el',
+		description: 'Answers a given question',
+		options: [
+			{
+				name: 'question',
+				description: 'The question Edelgard should answer',
+				type: 3,
+				required: true,
+			},
+		],
+	},
+	{
 		name: 'elhelp',
 		description: 'Gives a list of commands',
 	},

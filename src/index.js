@@ -8,7 +8,7 @@ import { Client, IntentsBitField, EmbedBuilder, ActivityType } from 'discord.js'
 import { quotes } from './data/quotes.js';
 
 // utilities
-import { predictionApiCall, tenorApiCall } from './utility.js';
+import { predictionApiCall, tenorApiCall, openaiApiCall } from './utility.js';
 
 // ________
 
@@ -120,6 +120,32 @@ client.on('interactionCreate', async interaction => {
 			} catch (error) {
 				console.error(`Unexpected error while getting response from the API: ${error}`);
 				interaction.reply('Apologies, but an error occurred while getting a random Edelgard GIF. Please try again later. 🦅');
+			}
+		}
+
+		if (interaction.commandName === 'el') {
+			// open ai api integration
+			const userQuestion = interaction.options.getString('question');
+
+			if (!userQuestion) {
+				// failsafe. the question is required though, this should never happen.
+				interaction.reply('Please provide a question. 🦅');
+				return;
+			} else {
+				let reply;
+				try {
+					const response = await openaiApiCall();
+					reply = `${response}`;
+				} catch (error) {
+					console.error(`Unexpected error while getting response from the API: ${error}`);
+					reply = 'Apologies, but an error occurred with the OpenAI API. Please try again later. 🦅';
+				}
+				const embed = new EmbedBuilder()
+					.setColor(0xff0000)
+					.setTimestamp()
+					.setThumbnail('https://assets.fedatamine.com/3h/face_school/339/0.png')
+					.addFields({ name: 'Edelgard 🦅', value: `${reply}` });
+				interaction.reply({ embeds: [embed] });
 			}
 		}
 
