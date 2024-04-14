@@ -28,6 +28,9 @@ const client = new Client({
 
 // sent messages on the server
 client.on('messageCreate', message => {
+	// bot mention
+	const botMention = `<@${client.user.id}>`;
+
 	// console.log(message.content);
 
 	// check if user is a bot
@@ -38,6 +41,19 @@ client.on('messageCreate', message => {
 	// if message contains edelgard, default message
 	if (message.content.toLowerCase().includes('edelgard')) {
 		message.reply(`I see you mentioned me, ${message.author.username}. Thank you for that! Long live the Empire and its ideals. 🦅`);
+	}
+
+	// if bot is tagged and an attachment is given (for conversor of ancient tongue)
+	if (botMention && message.attachments.size > 0) {
+
+		// check if one of the attachments is an image
+		const isImage = message.attachments.some(attachment => attachment.contentType.startsWith('image'));
+		// if so, proceed to image processing
+		if (isImage) {
+			message.reply('working! attachment is an image');
+		} else {
+			message.reply('working! attachment is not an image');
+		}
 	}
 });
 
@@ -198,7 +214,7 @@ client.on('interactionCreate', async interaction => {
 					{ name: '**/elquote**', value: 'Edelgard will reply with a random Edelgard quote.' },
 					{ name: '**/elsight**', value: 'Edelgard will predict the future with the help of a 8ball. You should provide a question.' },
 					{ name: '**/elgif**', value: 'Edelgard will reply with a random Edelgard GIF via Tenor.' },
-					{ name: '**/el**', value: 'Edelgard will provide an ancient tongue conversion.' },
+					{ name: '**/el**', value: 'Edelgard will answer a given question.' },
 					{ name: '**/elreyson**', value: 'Edelgard will convert text to the ancient tongue used by Herons (FE9/10).' },
 					{ name: '**/elhelp**', value: 'Edelgard will list all available commands. You just did this one. 🦅 ' },
 				);
