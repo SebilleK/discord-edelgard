@@ -43,9 +43,8 @@ client.on('messageCreate', message => {
 		message.reply(`I see you mentioned me, ${message.author.username}. Thank you for that! Long live the Empire and its ideals. 🦅`);
 	}
 
-	// if bot is tagged and an attachment is given (for conversor of ancient tongue)
+	//! if bot is tagged and an attachment is given (for conversor of ancient tongue)
 	if (botMention && message.attachments.size > 0) {
-
 		// check if one of the attachments is an image
 		const isImage = message.attachments.some(attachment => attachment.contentType.startsWith('image'));
 		// if so, proceed to image processing
@@ -175,7 +174,7 @@ client.on('interactionCreate', async interaction => {
 			const userInput = interaction.options.getString('input');
 
 			// create a canvas
-			const canvas = createCanvas(500, 200);
+			const canvas = createCanvas(800, 400);
 			const ctx = canvas.getContext('2d');
 
 			// background
@@ -183,11 +182,31 @@ client.on('interactionCreate', async interaction => {
 			ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 			// custom font
-			ctx.font = '20px Ancient Tongue';
+			ctx.font = '35px Ancient Tongue';
+
+			// wrap text (if text reaches max width of canvas)
+			function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
+				let words = text.split(' ');
+				let line = '';
+				for (let n = 0; n < words.length; n++) {
+					let testLine = line + words[n] + ' ';
+					let metrics = ctx.measureText(testLine);
+					let testWidth = metrics.width;
+					if (testWidth > maxWidth && n > 0) {
+						ctx.fillText(line, x, y);
+						line = words[n] + ' ';
+						y += lineHeight;
+					} else {
+						line = testLine;
+					}
+				}
+				ctx.fillText(line, x, y);
+			}
 
 			// draw on canvas
 			ctx.fillStyle = 'black';
-			ctx.fillText(userInput, 10, 50);
+			//? adjust wrapping here if there are canvas changes
+			wrapText(ctx, userInput, 10, 50, 780, 36);
 
 			// convert canvas to buffer and make attachment
 			const buffer = canvas.toBuffer('image/png');
